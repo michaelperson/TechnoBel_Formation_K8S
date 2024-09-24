@@ -1,0 +1,1 @@
+kubectl create -f ../manifests/10_HelloAppService.yaml

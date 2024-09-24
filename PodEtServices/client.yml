@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: technoapi-client
+  namespace: apiserver
+  labels:
+    app: restapi
+    author: ZeBest  
+spec:
+  containers:
+    - name: technoapi-cli-prod
+      image: dockermikeperson251/simpleapicorrected:latest
+      resources:
+        limits:
+          memory: "600Mi"
+          cpu: "0.5"
+        requests:
+          memory: "1Mi"
+          cpu: "0.5"
+      ports:
+      - containerPort: 80    
+  nodeName: kind-worker2

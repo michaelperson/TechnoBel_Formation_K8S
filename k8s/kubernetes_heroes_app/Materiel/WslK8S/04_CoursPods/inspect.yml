@@ -1,0 +1,13 @@
+#Ajout d'un pod avec une image linux (Alpine) MAIS ce pod est en statut finished car pas de process lancé
+apiVersion: v1
+kind: Pod
+metadata:
+  name: inspect
+  labels:
+    version: v1
+    zone: dev
+spec:
+  nodeName: kind-worker2
+  containers:
+    - name: inspect
+      image: alpine:latest

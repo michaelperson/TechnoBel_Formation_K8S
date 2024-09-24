@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heroes-deploy
+spec:
+  replicas: 10
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:    
+      maxUnavailable: 2     
+      maxSurge: 1 
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: heroes-backend
+  template:
+    metadata:
+      labels:
+        app: heroes-backend
+        version: v1.0.1
+    spec:
+      containers:
+      - name: heroes-backend-pod
+        image: registry.gitlab.com/cogcoursedevops/kubernetes_heroes_app:k8s
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
+          requests:
+            memory: 256Mi
+            cpu: "0.2"
+        ports:
+        - containerPort: 5000

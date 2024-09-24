@@ -1,0 +1,1 @@
+kubectl apply -f ../manifests/5_configmap.yaml

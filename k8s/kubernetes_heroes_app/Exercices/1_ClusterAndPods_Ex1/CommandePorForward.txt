@@ -1,0 +1,4 @@
+#Api
+kubectl port-forward simpleapi-rc-4cflq 3000:3000
+#Application
+kubectl port-forward simple-api-client 8080:80

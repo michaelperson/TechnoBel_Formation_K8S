@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: "2021-02-22T23:23:42Z"
+  generation: 1
+  labels:
+    app: heroes-deploy
+  name: heroes-deploy
+  namespace: default
+  resourceVersion: "29533"
+  selfLink: /apis/apps/v1/namespaces/default/deployments/heroes-deploy
+  uid: 6a2b9f80-d685-4404-8bbe-abade7a65a58
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: heroes-deploy
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: heroes-deploy
+    spec:
+      containers:
+      - image: registry.gitlab.com/cogcoursedevops/kubernetes_heroes_app:latest
+        imagePullPolicy: Always
+        name: kubernetes-heroes-app-p7w5c
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}

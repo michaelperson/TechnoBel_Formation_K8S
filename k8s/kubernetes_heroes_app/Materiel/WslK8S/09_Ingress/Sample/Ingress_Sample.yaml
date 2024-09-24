@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dev-ingress
+  namespace: dev
+spec:
+  rules:
+  - host: dev.apps.cognitic.be
+    http:
+      paths:
+      - backend:
+          serviceName: hello-service
+          servicePort: 80
+
+          

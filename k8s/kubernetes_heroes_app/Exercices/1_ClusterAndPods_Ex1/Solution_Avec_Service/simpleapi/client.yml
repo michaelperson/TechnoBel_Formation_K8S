@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-api-client
+  labels:
+    app: web
+spec:
+  nodeName: kind-worker
+  containers:
+  - name: simple-api-client
+    image: dockermikeperson251/simpleapicorrected:latest
+    ports:
+    - containerPort: 80

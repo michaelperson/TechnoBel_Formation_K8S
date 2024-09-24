@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-env
+data:
+  mongoUrl: mongo.ns-heroes.svc.cluster.local

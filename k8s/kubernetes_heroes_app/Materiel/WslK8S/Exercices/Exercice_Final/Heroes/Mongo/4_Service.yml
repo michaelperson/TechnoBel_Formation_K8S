@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+  labels:
+    app.kubernetes.io/name: mongo-service
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017 
+    name: mongo-port  
+  clusterIP: None 
+  selector:
+    app.kubernetes.io/name: mongoPod

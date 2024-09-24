@@ -1,0 +1,4 @@
+#ignorer les dossiers Theorie, images
+Theorie/
+images/
+node_modules/

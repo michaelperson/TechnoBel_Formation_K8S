@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: global-env
+data:
+  tx-smtp-relay-host: "172.24.0.1:25"
+  tx-smtp-relay-myhostname: wsl.k8s.local
+  tx-smtp-relay-username: k8smail

@@ -1,0 +1,82 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>RESTful API Example with Node.js</title>
+        <meta name="description" content="Node.js RESTful API">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
+                href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+
+                    <article class="markdown-body entry-content" itemprop="text">
+
+                        <h1>Node.js RESTful API Example</h1>
+                        
+
+                        
+
+                        <h2>Available end-points</h2>
+                        <h3>GET /events</h3>
+                        <p>Gets all the available events (12 sample events).
+                        </p>
+                        <p><strong>Example:</strong> 
+                        <p>Get All Events <button id="btnAllEvent" tag="events" class="btnEP">Get</button></p>
+                       
+                            
+                        <h3>GET /events/:id</h3>
+                        <p>Obtains an event given its id.</p>
+                        <p><strong>Example:</strong> 
+                            <p>Get  Events with id 1 <button id="btnAllEvent" tag="events/1" class="btnEP">Get</button></p>
+                       
+                        
+                    </article>
+
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div id="DivAllEvent"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="http://code.jquery.com/jquery-1.12.0.min.js" type="text/javascript"></script>
+        <noscript>
+            <p>JavaScript not enabled. Please active your JavaScript preferences.</p>
+        </noscript>
+        <script type="text/javascript">window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <noscript></noscript>
+        <script src="js/plugins.js" type="text/javascript"></script>
+        <noscript></noscript>
+        <script src="js/main.js" type="text/javascript"></script>
+        <noscript></noscript>
+        
+        <script>
+            $(".btnEP").on("click", function(){
+                let ep = $(this).attr("tag");
+                $("#DivAllEvent").html("");
+                $.getJSON( "http://localhost:30001/"+ep, function( data ) {
+                    $("#DivAllEvent").html(JSON.stringify(data));
+                  });
+    
+
+            });
+            
+        </script>
+        
+    </body>
+</html>

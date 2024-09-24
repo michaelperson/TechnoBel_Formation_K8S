@@ -1,0 +1,85 @@
+1) Créer un pod avec l'image officelle de Drupal (drupalpod )
+2) Créer une secret pour Mysql (utiliser echo - n 'votre password' | base64 pour générer la valeur à mettre dans le fichier yam suivant)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-pass
+type: Opaque
+data:
+  password: YWRtaW4= 
+3) appliquer le manifest
+4) Créer un manifest pour déployer Mysql
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-mysql
+  labels:
+    name: lbl-k8s-mysql
+spec:
+  containers:
+  - name: mysql
+    image: mysql:5.17
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: mysql-pass
+          key: password
+    ports:
+    - name: mysql
+      containerPort: 3306
+      protocol: TCP
+    volumeMounts:
+    - name: k8s-mysql-storage
+      mountPath: /var/lib/mysql
+  volumes:
+  - name: k8s-mysql-storage
+    emptyDir: {}
+5) appliquer le manifest
+6) Connectez vous au pod mysql et lancer un batch
+kubectl exec k8s-mysql -it -- bash
+7) créer un dossier mysql dans le /home
+8) lancer le service mysql et créer une base de données drupaldb
+
+
+   ==> sudo   service mysql start
+   ==> mysql --user=root --password=$MYSQL_ROOT_PASSWORD
+   ==> create database drupaldb;
+
+9) quitter le bash (ctlr-D)
+10) lancer la commande suivante pour retrouver l'adresse IP du pod Mysql
+kubectl get pods -o wid
+11) ouverz un bash sur le pod drupal
+ kubectl exec drupalpod -it -- bash
+12) mettre à jour la version debian
+apt get update
+13) installer le pacjkege iputils-ping et vérifier que le pod peut pingerla machine Mysql
+14) sortez du bash (ctrl-d)
+15) Effectuez un port-forward pour l'image de drupal vers le port 80
+kubectl port-forward drupalpod 8080:80
+16) lancer sur votre navigateur l'adresse 127.0.0.1:8080
+17) l'installation de drupal commence
+18) lorsqu'on vous demande les infos de Mysql
+     ==> nom de la db : drupaldb
+     ==> adresse db : ip du pod k8s-mysql
+     ==> utilisateur : root
+     ==> mot de passe : celui créé dans le secret
+19) Votre drupal est créé
+
+20) Bonus
+Créer un service pour votre site drupal
+apiVersion: v1
+kind: Service
+metadata:
+  name: drupalservice
+spec:
+  selector:
+    app: web
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30001
+21) stopper le port-forward
+22) lancer votre navigateur sur 127.0.0.1:300001

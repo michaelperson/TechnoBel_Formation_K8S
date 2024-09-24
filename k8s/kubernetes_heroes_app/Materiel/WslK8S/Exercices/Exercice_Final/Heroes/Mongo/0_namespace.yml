@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ns-heroes 
+    
+#ensuite la commande suivante 
+#kubectl config set-context  dev --namespace=ns-heroes --cluster=kind-kind --user=kind-kind
+#kubectl config use-context dev

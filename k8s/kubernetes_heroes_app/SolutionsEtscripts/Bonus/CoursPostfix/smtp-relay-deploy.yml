@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: k8s-smtp-relay
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-smtp-relay
+    spec:
+      containers:
+        - name: k8s-smtp-relay
+          image: applariat/tx-smtp-relay
+          env:
+            - name: TX_SMTP_RELAY_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: global-env
+                  key: tx-smtp-relay-host
+            - name: TX_SMTP_RELAY_MYHOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: global-env
+                  key: tx-smtp-relay-myhostname
+            - name: TX_SMTP_RELAY_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: global-env
+                  key: tx-smtp-relay-username
+            - name: TX_SMTP_RELAY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: global-env
+                  key: tx-smtp-relay-password
+          ports:
+            - containerPort: 25

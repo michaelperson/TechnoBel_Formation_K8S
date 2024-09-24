@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: unoreplicator
+spec:
+  replicas: 4
+  selector:
+    app: uno
+  template:
+    metadata:
+      labels:
+        app: uno
+    spec:
+      containers:
+      - name: gastero-pod
+        image: dockermikeperson251/unogame
+        ports:
+        - containerPort: 3000

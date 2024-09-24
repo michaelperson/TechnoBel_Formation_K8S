@@ -1,0 +1,1 @@
+kubectl apply -f ../manifests/7_IngressClass.yaml

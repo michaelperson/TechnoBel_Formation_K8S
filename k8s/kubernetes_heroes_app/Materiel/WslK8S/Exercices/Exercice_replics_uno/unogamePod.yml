@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gastero-pod
+  labels:
+    app: uno 
+spec:
+  nodeName: kind-worker2
+  containers:
+  - name: coquille
+    image: dockermikeperson251/unogame:latest
+    ports:
+    - containerPort: 3000  

@@ -1,0 +1,19 @@
+apiVersion: app/v1     
+kind : ReplicaSet 
+metadata:
+  name: heroes-back-end
+  labels:
+    app: backend                                                           
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend                                                            
+    template:
+      metadata:
+        labels:
+          app: backend                
+      spec:
+        containers:
+        - name: heroes-nodejs-backend                                                   
+          image: registry.gitlab.com/cogcoursedevops/kubernetes_heroes_app:latesi

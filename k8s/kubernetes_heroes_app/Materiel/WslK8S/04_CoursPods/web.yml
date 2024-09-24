@@ -1,0 +1,14 @@
+#Ajout d'un pod avec un serveur web nginx sur un worker
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: web
+spec:
+  nodeName: kind-worker
+  containers:
+    - name: nginx
+      image: registry.hub.docker.com/library/nginx:latest
+      ports:
+      - containerPort: 80

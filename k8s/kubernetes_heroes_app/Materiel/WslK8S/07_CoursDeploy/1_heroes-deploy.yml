@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heroes-deploy
+  namespace: ns-heroes
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: heroes-backend
+  template:
+    metadata:
+      labels:
+        app: heroes-backend
+        namespace: ns-heroes
+    spec:
+      containers:
+      - name: heroes-backend-pod
+        image: registry.gitlab.com/cogcoursedevops/kubernetes_heroes_app:latest
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
+          requests:
+            memory: 256Mi
+            cpu: "0.2"
+        ports:
+        - containerPort: 5000

@@ -1,0 +1,21 @@
+#ajout d'un pod avec à partir de l'image Heroes-back-end
+apiVersion: v1
+kind: Pod
+metadata:
+  name: heroes-alone
+  labels:
+    app: backend 
+spec:
+  nodeName: kind-worker
+  containers:
+    - name: heroes-back-end-container
+      image: registry.gitlab.com/cogcoursedevops/kubernetes_heroes_app:latest
+      resources:
+        limits:
+          memory: 512Mi
+          cpu: "1"
+        requests:
+          memory: 256Mi
+          cpu: "0.2"
+      ports:
+        - containerPort: 5000

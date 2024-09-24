@@ -1,0 +1,14 @@
+#Pod pour drupal
+apiVersion: v1
+kind: Pod
+metadata:
+  name: drupalpod
+  labels:
+    app: web
+spec:
+  nodeName: kind-worker2
+  containers:
+    - name: drupalcontainer
+      image: registry.hub.docker.com/library/drupal:latest
+      ports:
+        - containerPort: 80  
